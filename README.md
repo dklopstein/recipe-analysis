@@ -1,4 +1,4 @@
-# My Project Title 
+# Do healtier recipes have to taste bad?: Investigating the Relationship Between Healthy Recipes and their Rating
 
 by Derek Klopstein (dklopstein@ucsd.edu)
 

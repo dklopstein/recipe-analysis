@@ -165,7 +165,7 @@ I believe that the missingness of the `'review'` column is NMAR. These could be 
 
 We moved on to examine the missingness of `'rating'` in the merged DataFrame by testing the dependency of its missingness. We are investigating whether the missiness in the `'rating'` column depends on the column `'n_ingredients'`, which is the number of ingredients in a recipe, or the column `'minutes'`, which is number of minutes need to complete the recipe.
 
-> Proportion of Sugar and Rating
+> Number of Ingredients and Rating
 
 **Null Hypothesis:** The missingness of ratings does not depend on the number of ingredients in the recipe.
 
@@ -292,6 +292,6 @@ For the fairness analysis, I split the recipes into two groups: recipes submitte
   frameborder="0"
 ></iframe>
 
-To run the permutation test, I binarized the `'submitted'` column to have 0 or 1 if the recipe was submitted in 2010 or before or after 2010 respectively. When I took the difference in the RSME, we got an observed test statistic of **9.49**. I then shuffled the `'submitted'` column 1000 times to collect 1000 simulated differences in the two distributions as described in the test statistics. After running the permutation test, I got a p-value of **0.36**. Since the p-value of 0.36 is greater than 0.05, we fail to reject the null hypothesis that our model is fair. The model's RSME for recipes submitted before and in 2010 are roughly the same as recipes posted after 2010.
+To run the permutation test, I binarized the `'submitted'` column to have 0 or 1 if the recipe was submitted in 2010 or before or after 2010 respectively. When I took the difference in the RSME, I got an observed test statistic of **9.49**. I then shuffled the `'submitted'` column 1000 times to collect 1000 simulated differences in the two distributions as described in the test statistics. After running the permutation test, I got a p-value of **0.36**. Since the p-value of 0.36 is greater than 0.05, we fail to reject the null hypothesis that our model is fair. The model's RSME for recipes submitted before and in 2010 are roughly the same as recipes posted after 2010.
 
 ---

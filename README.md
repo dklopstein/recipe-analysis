@@ -275,24 +275,23 @@ The metric, **RSME**, of the final model is *33.75**, which is a 5.0 increase fr
 
 ## Fairness Analysis
 
-For our fairness analysis, we split the recipes into two groups: high calories and low calories. We designated high calorie recipes to be ones with calories > 301.1 and low calorie recipes to be ones with calories <= 301.1. We found that the median calories for our data set is **301.1** which is why we chose it as the threshold. We used median instead of mean, because we previously found that calories had many high outliers which can skew our results. We chose to evaluate the **precision parity** of the model for the two groups, because we think it’s more important for the model to correctly identify the rating of a recipe among all instances of that rating. False positives would not be good since it would mislead users with the incorrectly labeled ratings. False positives would not be good since it would mislead users with the incorrectly labeled ratings. For example, if we predicted recipes with lower calories to have a bad rating, people would be discouraged to try them. For recipes with lower calories, it wouldn’t be good to mislabel them, as low calorie recipes may be healthier for people.
+For the fairness analysis, I split the recipes into two groups: recipes submitted in and before 2010 and recipes submitted after 2010. I chose to evaluate the **RSME** of the model for the two groups, because that gives us the best idea of the accuracy of our regression model. 
 
-**Null Hypothesis**: Our model is fair. Its precision for recipes with higher calories and lower calories are roughly the same, and any differences are due to random chance.
+**Null Hypothesis**: The model is fair. Its RSME for recipes posted after 2010 and before or in 2010 are roughly the same, and any differences are due to random chance.
 
-**Alternative Hypothesis**: Our model is unfair. Its precision for recipes with lower calories is lower than its precision for recipes with higher calories.
+**Alternate Hypothesis**: The model is unfair. Its RSME for recipes posted after 2010 is lower than its RSME for recipes with recipes posted in or before 2010.
 
-**Test Statistic**: Difference in precision (low calories - high calories)
+**Test Statistic**: Difference in RSME (before or in 2010 - after 2010)
 
 **Significance Level**: 0.05
 
 <iframe
-  src="assets/empirical_precision.html"
+  src="assets/empirical_rsme.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
 
-To run the permutation test, we created a new column `is_high_calories` to differentiate between the low and high calorie recipes. When we took the difference in their precision, we got an observed test statistic of **-0.023**. We shuffled the `is_high_calories` column for 1000 times to collect 1000 simulating differences in the two distributions as described in the test statistic. After running our permutation test, we got a p-value of **0.0**. Since the p-value of 0.0 is less than 0.05, we reject the null hypothesis that our model is fair. The model's precision for recipes with lower calories is lower than its precision for recipes with higher calories.
-## Cleaning and EDA
+To run the permutation test, I binarized the `'submitted'` column to have 0 or 1 if the recipe was submitted in 2010 or before or after 2010 respectively. When I took the difference in the RSME, we got an observed test statistic of **9.49**. I then shuffled the `'submitted'` column 1000 times to collect 1000 simulated differences in the two distributions as described in the test statistics. After running the permutation test, I got a p-value of **0.36**. Since the p-value of 0.36 is greater than 0.05, we fail to reject the null hypothesis that our model is fair. The model's RSME for recipes submitted before and in 2010 are roughly the same as recipes posted after 2010.
 
 ---

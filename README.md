@@ -1,4 +1,4 @@
-# Do healtier recipes have to taste bad?: Investigating the Relationship Between Healthy Recipes and their Rating
+# Do healtier recipes have to taste bad?: Investigating the Relationship Between Healthy Recipes and their Macronutrients
 
 Author: Derek Klopstein
 
@@ -196,13 +196,6 @@ The **observed statistic** of **0.1607** is indicated by the red vertical line o
 
 **Significance Level:** 0.05
 
-<iframe
-  src="assets/empirical_diff_prescale.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
-
 We ran another permutation test by shuffling the missingness of rating for 1000 times to collect 1000 simulating mean differences in the two distributions as described in the test statistic.
 
 <iframe
@@ -271,7 +264,7 @@ In the final model I added `n_ingredients`, `sugar(PDV)`, `sodium (PDV)`, `satur
 
 I used *k*-fold cross-validation to find the best hyperparameters for the regression model, which were the ones I decided to add. 
 
-The metric, **RSME**, of the final model is *33.75**, which is a 5.0 increase from the RSME of the baseline model.
+The metric, **RSME**, of the final model is **33.75**, which is a 5.0 increase from the RSME of the baseline model.
 
 ## Fairness Analysis
 
